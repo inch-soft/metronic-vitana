@@ -48,7 +48,7 @@ const Card5: FC<Props> = ({
             <KTIcon iconName='category' className='fs-3 text-primary' />
           </button>
 
-          <Dropdown1 />
+          {/* <Dropdown1 /> */}
         </div>
       </div>
 

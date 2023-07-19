@@ -64,78 +64,17 @@ export function Login() {
     >
       {/* begin::Heading */}
       <div className='text-center mb-11'>
-        <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
-        <div className='text-gray-500 fw-semibold fs-6'>Your Social Campaigns</div>
+        <h1 className='text-dark fw-bolder mb-3'>Авторизация</h1>
       </div>
-      {/* begin::Heading */}
 
-      {/* begin::Login options */}
-      <div className='row g-3 mb-9'>
-        {/* begin::Col */}
-        <div className='col-md-6'>
-          {/* begin::Google link */}
-          <a
-            href='#'
-            className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
-          >
-            <img
-              alt='Logo'
-              src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}
-              className='h-15px me-3'
-            />
-            Sign in with Google
-          </a>
-          {/* end::Google link */}
-        </div>
-        {/* end::Col */}
-
-        {/* begin::Col */}
-        <div className='col-md-6'>
-          {/* begin::Google link */}
-          <a
-            href='#'
-            className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
-          >
-            <img
-              alt='Logo'
-              src={toAbsoluteUrl('/media/svg/brand-logos/apple-black.svg')}
-              className='theme-light-show h-15px me-3'
-            />
-            <img
-              alt='Logo'
-              src={toAbsoluteUrl('/media/svg/brand-logos/apple-black-dark.svg')}
-              className='theme-dark-show h-15px me-3'
-            />
-            Sign in with Apple
-          </a>
-          {/* end::Google link */}
-        </div>
-        {/* end::Col */}
-      </div>
-      {/* end::Login options */}
-
-      {/* begin::Separator */}
       <div className='separator separator-content my-14'>
-        <span className='w-125px text-gray-500 fw-semibold fs-7'>Or with email</span>
+        <span className='w-125px text-gray-500 fw-semibold fs-7'>Vitana</span>
       </div>
-      {/* end::Separator */}
 
-      {formik.status ? (
-        <div className='mb-lg-15 alert alert-danger'>
-          <div className='alert-text font-weight-bold'>{formik.status}</div>
-        </div>
-      ) : (
-        <div className='mb-10 bg-light-info p-8 rounded'>
-          <div className='text-info'>
-            Use account <strong>admin@demo.com</strong> and password <strong>demo</strong> to
-            continue.
-          </div>
-        </div>
-      )}
-
+     
       {/* begin::Form group */}
       <div className='fv-row mb-8'>
-        <label className='form-label fs-6 fw-bolder text-dark'>Email</label>
+        <label className='form-label fs-6 fw-bolder text-dark'>Login</label>
         <input
           placeholder='Email'
           {...formik.getFieldProps('email')}
@@ -156,9 +95,6 @@ export function Login() {
           </div>
         )}
       </div>
-      {/* end::Form group */}
-
-      {/* begin::Form group */}
       <div className='fv-row mb-3'>
         <label className='form-label fw-bolder text-dark fs-6 mb-0'>Password</label>
         <input
@@ -183,21 +119,7 @@ export function Login() {
           </div>
         )}
       </div>
-      {/* end::Form group */}
-
-      {/* begin::Wrapper */}
-      <div className='d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8'>
-        <div />
-
-        {/* begin::Link */}
-        <Link to='/auth/forgot-password' className='link-primary'>
-          Forgot Password ?
-        </Link>
-        {/* end::Link */}
-      </div>
-      {/* end::Wrapper */}
-
-      {/* begin::Action */}
+     
       <div className='d-grid mb-10'>
         <button
           type='submit'
@@ -205,7 +127,7 @@ export function Login() {
           className='btn btn-primary'
           disabled={formik.isSubmitting || !formik.isValid}
         >
-          {!loading && <span className='indicator-label'>Continue</span>}
+          {!loading && <span className='indicator-label'>Войти</span>}
           {loading && (
             <span className='indicator-progress' style={{display: 'block'}}>
               Please wait...
@@ -214,14 +136,8 @@ export function Login() {
           )}
         </button>
       </div>
-      {/* end::Action */}
 
-      <div className='text-gray-500 text-center fw-semibold fs-6'>
-        Not a Member yet?{' '}
-        <Link to='/auth/registration' className='link-primary'>
-          Sign up
-        </Link>
-      </div>
+     
     </form>
   )
 }

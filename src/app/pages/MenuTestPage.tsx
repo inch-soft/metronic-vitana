@@ -541,10 +541,10 @@ const MenuTestPage: FC = () => {
                   data-kt-menu-placement='bottom-start'
                   className='menu-item me-lg-2'
                 >
-                  <span className='menu-link py-3'>
+                  {/* <span className='menu-link py-3'>
                     <span className='menu-title'>Mega Menu</span>
                     <span className='menu-arrow d-lg-none'></span>
-                  </span>
+                  </span> */}
                   <div
                     className='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown w-100 w-lg-600px p-5 p-lg-5'
                     style={{margin: '0px'}}
