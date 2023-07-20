@@ -13,6 +13,8 @@ import Stock from '../pages/stock'
 import Response from '../pages/response'
 import Product from '../pages/product'
 import Customer from '../pages/customer'
+import EditPage from '../pages/product/editAdd'
+import EditPageCustomer from '../pages/customer/editAdd'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -30,8 +32,14 @@ const PrivateRoutes = () => {
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
         <Route path='product' element={<Product />} />
+        <Route path='product/:id' element={<EditPage />} />
+        <Route path='product/add' element={<EditPage />} />
         <Route path='order' element={<Order />} />
+
         <Route path='customer' element={<Customer />} />
+        <Route path='customer/:id' element={<EditPageCustomer />} />
+        <Route path='customer/add' element={<EditPageCustomer />} />
+        
         <Route path='stock' element={<Stock />} />
         <Route path='response' element={<Response />} />
         <Route path='manager' element={<Manager />} />

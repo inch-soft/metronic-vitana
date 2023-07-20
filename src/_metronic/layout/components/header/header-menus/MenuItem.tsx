@@ -29,7 +29,7 @@ const MenuItem: FC<Props> = ({to, title, icon, fontIcon, hasArrow = false, hasBu
             <span className='bullet bullet-dot'></span>
           </span>
         )}
-{/* 
+        {/* 
         {icon && (
           <span className='menu-icon'>
             <KTIcon iconName={icon} className='fs-2' />

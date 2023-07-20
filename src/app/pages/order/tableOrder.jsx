@@ -3,10 +3,11 @@ import React, {useState, useEffect} from 'react'
 import {KTIcon, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Pagination} from '@nextui-org/react'
 import {Link} from 'react-router-dom'
-import {deleteProduct, getProduct} from '../../modules/auth/core/_requests'
+import {deleteOrder, getOrder} from '../../modules/auth/core/_requests'
 import {toast} from 'react-toastify'
+import moment from 'moment'
 
-const TableProduct = ({className}) => {
+const TableOrder = ({className}) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
@@ -14,13 +15,13 @@ const TableProduct = ({className}) => {
   }, [])
 
   const renderProduct = () => {
-    getProduct().then((r) => {
+    getOrder().then((r) => {
       setData(r.data)
     })
   }
 
   const deleteProductS = (id) => {
-    deleteProduct(id)
+    deleteOrder(id)
       .then((r) => {
         toast.success('Удалено успешно', {
           position: toast.POSITION.TOP_CENTER,
@@ -46,7 +47,7 @@ const TableProduct = ({className}) => {
           <h3 className='card-title align-items-start flex-column'>
             <span className='card-label fw-bold fs-3 mb-1'>Продукты</span>
             <span className='text-muted mt-1 fw-semibold fs-7'>
-              Продукты: {data?.results?.length}
+              Заказы: {data?.results?.length}
             </span>
           </h3>
           <div
@@ -67,8 +68,15 @@ const TableProduct = ({className}) => {
             <table className='table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4'>
               <thead>
                 <tr className='fw-bold text-muted'>
-                  <th className='min-w-150px'>Имя</th>
-                  <th className='min-w-140px'>Цена</th>
+                  <th className='min-w-140px'>Hаименование товара</th>
+                  <th className='min-w-140px'>Цена продукта</th>
+                  <th className='min-w-140px'>Cпособ оплаты</th>
+                  <th className='min-w-140px'>Имя Клиента</th>
+                  <th className='min-w-140px'> Код клиента</th>
+                  <th className='min-w-140px'>Tелефон клиента</th>
+                  <th className='min-w-140px'>Дата заказа</th>
+                  <th className='min-w-140px'>Статус</th>
+
                   <th className='min-w-100px text-end'>Действие</th>
                 </tr>
               </thead>
@@ -79,15 +87,37 @@ const TableProduct = ({className}) => {
                     <tr>
                       <td>
                         <div className='d-flex align-items-center'>
-                          <div className='symbol symbol-45px me-5'>
-                            <img src={toAbsoluteUrl('/media/111.jpg')} alt='' />
-                          </div>
                           <div className='d-flex justify-content-start flex-column'>
                             <div className='text-dark fw-bold text-hover-primary fs-6'>
-                              {item.name}
+                              {item.product.name}
                             </div>
-                            <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                              {/* count */}
+                          </div>
+                        </div>
+                      </td>
+
+                      <td className='text-end'>
+                        <div className='d-flex flex-column w-100 me-2'>
+                          <div className='d-flex flex-stack mb-2'>
+                            <span className='text-dark fw-bold fs-7 fw-semibold'>
+                              {item.product.price} сум
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className='text-end'>
+                        <div className='d-flex flex-column w-100 me-2'>
+                          <div className='d-flex flex-stack mb-2'>
+                            <span className='text-dark fw-bold fs-7 fw-semibold'>
+                              {item.payment_type}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className='text-end'>
+                        <div className='d-flex flex-column w-100 me-2'>
+                          <div className='d-flex flex-stack mb-2'>
+                            <span className='text-dark fw-bold fs-7 fw-semibold'>
+                              {item.customer.full_name}
                             </span>
                           </div>
                         </div>
@@ -96,8 +126,39 @@ const TableProduct = ({className}) => {
                       <td className='text-end'>
                         <div className='d-flex flex-column w-100 me-2'>
                           <div className='d-flex flex-stack mb-2'>
-                            <span className='text-muted me-2 fs-7 fw-semibold'>
-                              {item.price} сум
+                            <span className='text-dark fw-bold fs-7 fw-semibold'>
+                              {item.customer.code}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className='text-end'>
+                        <div className='d-flex flex-column w-100 me-2'>
+                          <div className='d-flex flex-stack mb-2'>
+                            <span className='text-dark fw-bold fs-7 fw-semibold'>
+                              {item.customer.phone_number}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className='text-end'>
+                        <div className='d-flex flex-column w-100 me-2'>
+                          <div className='d-flex flex-stack mb-2'>
+                            <span className='text-dark fw-bold fs-7 fw-semibold'>
+                              {moment(item.created_at).format('DD/MM/YYYY, h:mm')}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className='text-end'>
+                        <div className='d-flex flex-column w-100 me-2'>
+                          <div className='d-flex flex-stack mb-2'>
+                            <span className='text-dark fw-bold fs-7 fw-semibold'>
+                              {item.is_completed == true ? (
+                                <span className='badge badge-primary'>True</span>
+                              ) : (
+                                <span className='badge badge-danger'>False</span>
+                              )}
                             </span>
                           </div>
                         </div>
@@ -131,4 +192,4 @@ const TableProduct = ({className}) => {
   )
 }
 
-export default TableProduct
+export default TableOrder

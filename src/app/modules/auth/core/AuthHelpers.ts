@@ -6,7 +6,9 @@ const getAuth = (): AuthModel | undefined => {
     return
   }
 
-  const lsValue: string | null = localStorage.getItem(AUTH_LOCAL_STORAGE_KEY)
+  const lsValue: any | null = localStorage.getItem(AUTH_LOCAL_STORAGE_KEY)
+
+
   if (!lsValue) {
     return
   }
@@ -52,8 +54,8 @@ export function setupAxios(axios: any) {
   axios.interceptors.request.use(
     (config: {headers: {Authorization: string}}) => {
       const auth = getAuth()
-      if (auth && auth.api_token) {
-        config.headers.Authorization = `Bearer ${auth.api_token}`
+      if (auth) {
+        config.headers.Authorization = `Bearer ${auth.access}`
       }
 
       return config

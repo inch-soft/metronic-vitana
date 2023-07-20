@@ -3,10 +3,10 @@ import React, {useState, useEffect} from 'react'
 import {KTIcon, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Pagination} from '@nextui-org/react'
 import {Link} from 'react-router-dom'
-import {deleteProduct, getProduct} from '../../modules/auth/core/_requests'
+import {deleteCustomer, getCustomer} from '../../modules/auth/core/_requests'
 import {toast} from 'react-toastify'
 
-const TableProduct = ({className}) => {
+const TableCustomer = ({className}) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
@@ -14,13 +14,13 @@ const TableProduct = ({className}) => {
   }, [])
 
   const renderProduct = () => {
-    getProduct().then((r) => {
+    getCustomer().then((r) => {
       setData(r.data)
     })
   }
 
   const deleteProductS = (id) => {
-    deleteProduct(id)
+    deleteCustomer(id)
       .then((r) => {
         toast.success('Удалено успешно', {
           position: toast.POSITION.TOP_CENTER,
@@ -44,10 +44,8 @@ const TableProduct = ({className}) => {
       <div className={`card ${className}`}>
         <div className='card-header border-0 pt-5'>
           <h3 className='card-title align-items-start flex-column'>
-            <span className='card-label fw-bold fs-3 mb-1'>Продукты</span>
-            <span className='text-muted mt-1 fw-semibold fs-7'>
-              Продукты: {data?.results?.length}
-            </span>
+            <span className='card-label fw-bold fs-3 mb-1'>Клиенты</span>
+            <span className='text-muted mt-1 fw-semibold fs-7'>Продукты: {data?.count}</span>
           </h3>
           <div
             className='card-toolbar'
@@ -56,9 +54,9 @@ const TableProduct = ({className}) => {
             data-bs-trigger='hover'
             title='Click to add a user'
           >
-            <Link to='/product/add' className='btn btn-sm btn-light-primary'>
+            <Link to='/customer/add' className='btn btn-sm btn-light-primary'>
               <KTIcon iconName='plus' className='fs-3' />
-              Добавить продукт
+              Добавить клиенты
             </Link>
           </div>
         </div>
@@ -67,8 +65,11 @@ const TableProduct = ({className}) => {
             <table className='table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4'>
               <thead>
                 <tr className='fw-bold text-muted'>
-                  <th className='min-w-150px'>Имя</th>
-                  <th className='min-w-140px'>Цена</th>
+                  <th className='min-w-150px'>ID</th>
+                  <th className='min-w-150px'>Код</th>
+                  <th className='min-w-150px'>Полное имя</th>
+                  <th className='min-w-150px'>Номер телефона</th>
+                  <th className='min-w-140px'>Номер телефона(2)</th>
                   <th className='min-w-100px text-end'>Действие</th>
                 </tr>
               </thead>
@@ -79,32 +80,54 @@ const TableProduct = ({className}) => {
                     <tr>
                       <td>
                         <div className='d-flex align-items-center'>
-                          <div className='symbol symbol-45px me-5'>
-                            <img src={toAbsoluteUrl('/media/111.jpg')} alt='' />
-                          </div>
                           <div className='d-flex justify-content-start flex-column'>
                             <div className='text-dark fw-bold text-hover-primary fs-6'>
-                              {item.name}
+                              {item.id}
                             </div>
-                            <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                              {/* count */}
-                            </span>
+                            <span className='text-muted fw-semibold text-muted d-block fs-7'></span>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className='d-flex align-items-center'>
+                          <div className='d-flex justify-content-start flex-column'>
+                            <div className='text-dark fw-bold text-hover-primary fs-6'>
+                              {item.code}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className='d-flex align-items-center'>
+                          <div className='d-flex justify-content-start flex-column'>
+                            <div className='text-dark fw-bold text-hover-primary fs-6'>
+                              {item.full_name}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className='d-flex align-items-center'>
+                          <div className='d-flex justify-content-start flex-column'>
+                            <div className='text-dark fw-bold text-hover-primary fs-6'>
+                              {item.phone_number}
+                            </div>
                           </div>
                         </div>
                       </td>
 
-                      <td className='text-end'>
-                        <div className='d-flex flex-column w-100 me-2'>
-                          <div className='d-flex flex-stack mb-2'>
-                            <span className='text-muted me-2 fs-7 fw-semibold'>
-                              {item.price} сум
-                            </span>
+                      <td>
+                        <div className='d-flex align-items-center'>
+                          <div className='d-flex justify-content-start flex-column'>
+                            <div className='text-dark fw-bold text-hover-primary fs-6'>
+                              {item.secondary_phone_number}
+                            </div>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className='d-flex justify-content-end flex-shrink-0'>
-                          <Link to={`/product/${item.id}`} className='card-product__desc'>
+                          <Link to={`/customer/${item.id}`} className='card-product__desc'>
                             <div className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                               <KTIcon iconName='pencil' className='fs-3' />
                             </div>
@@ -131,4 +154,4 @@ const TableProduct = ({className}) => {
   )
 }
 
-export default TableProduct
+export default TableCustomer
