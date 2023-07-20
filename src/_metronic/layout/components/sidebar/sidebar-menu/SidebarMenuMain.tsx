@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import {useIntl} from 'react-intl'
-import {KTIcon} from '../../../../helpers'
-import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub'
 import {SidebarMenuItem} from './SidebarMenuItem'
 
 const SidebarMenuMain = () => {
