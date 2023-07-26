@@ -17,9 +17,9 @@ const SidebarMenuMain = () => {
       <SidebarMenuItem to='/product' icon='external-drive' title='Продукты' fontIcon='bi-layers' />
       <SidebarMenuItem to='/customer' icon='brifecase-cros' title='Клиенты' fontIcon='bi-layers' />
       <SidebarMenuItem to='/order' icon='credit-cart' title='Заказы' fontIcon='bi-layers' />
-      <SidebarMenuItem to='/stock' icon='wifi-home' title='Склад' fontIcon='bi-layers' />
+      {/* <SidebarMenuItem to='/stock' icon='wifi-home' title='Склад' fontIcon='bi-layers' /> */}
       <SidebarMenuItem to='/manager' icon='security-user' title='Менеджеры' fontIcon='bi-layers' />
-      <SidebarMenuItem to='/response' icon='chart-line' title='Заявки' fontIcon='bi-layers' />
+      {/* <SidebarMenuItem to='/response' icon='chart-line' title='Заявки' fontIcon='bi-layers' /> */}
       
      
       {/* <SidebarMenuItemWithSub

@@ -82,6 +82,11 @@ export function createOrder(formdata) {
     ...formdata,
   })
 }
+export function getOrderId(params, id) {
+  return axios.get<any>(`${url}/orders/${id}`, {
+    ...params,
+  })
+}
 
 export function editOrder(formdata, id) {
   return axios.put<any>(`${url}/orders/${id}/`, {
@@ -93,18 +98,31 @@ export function deleteOrder(id) {
   return axios.delete<any>(`${url}/orders/${id}/`)
 }
 
-export function getOrderId(params, id) {
-  return axios.get<any>(`${url}/orders/${id}`, {
-    ...params,
-  })
-}
-
 export function getOrder(params) {
   return axios.get<any>(`${url}/orders`, {
     params,
   })
 }
 // ORDER
+
+// MANAGERS
+
+export function createManager(formdata) {
+  return axios.post<any>(`${url}/managers`, {
+    ...formdata,
+  })
+}
+export function getManagers(params) {
+  return axios.get<any>(`${url}/managers`, {
+    ...params,
+  })
+}
+
+// MANAGERS
+
+export function getDashboard() {
+  return axios.get<any>(`${url}/dashboard`, {})
+}
 
 // Server should return AuthModel
 export function register(

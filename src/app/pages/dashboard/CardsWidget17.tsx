@@ -1,14 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC, useEffect, useRef} from 'react'
-import {KTIcon} from '../../../../helpers'
-import {getCSSVariableValue} from '../../../../assets/ts/_utils'
-import {useThemeMode} from '../../../layout/theme-mode/ThemeModeProvider'
+// import {KTIcon} from '../../../../helpers'
+// import {getCSSVariableValue} from '../../../../assets/ts/_utils'
+// import {useThemeMode} from '../../../layout/theme-mode/ThemeModeProvider'
+import {getCSSVariableValue} from '../../../_metronic/assets/ts/_utils'
+import {useThemeMode} from '../../../_metronic/partials'
+import {KTIcon} from '../../../_metronic/helpers'
 
 type Props = {
   className: string
   chartSize?: number
   chartLine?: number
   chartRotate?: number
+  data?: any
 }
 
 const CardsWidget17: FC<Props> = ({
@@ -16,6 +20,7 @@ const CardsWidget17: FC<Props> = ({
   chartSize = 70,
   chartLine = 11,
   chartRotate = 145,
+  data,
 }) => {
   const chartRef = useRef<HTMLDivElement | null>(null)
   const {mode} = useThemeMode()
@@ -33,6 +38,7 @@ const CardsWidget17: FC<Props> = ({
       initChart(chartSize, chartLine, chartRotate)
     }, 10)
   }
+  console.log(data, 'data123')
 
   return (
     <div className={`card card-flush ${className}`}>
@@ -41,7 +47,9 @@ const CardsWidget17: FC<Props> = ({
           <div className='d-flex align-items-center'>
             <span className='fs-4 fw-semibold text-gray-400 me-1 align-self-start'></span>
 
-            <span className='fs-2hx fw-bold text-dark me-2 lh-1 ls-n2'>12</span>
+            <span className='fs-2hx fw-bold text-dark me-2 lh-1 ls-n2'>
+              {data?.total_number_of_orders}
+            </span>
 
             {/* <span className='badge badge-light-success fs-base'>
               <KTIcon iconName='arrow-up' className='fs-5 text-success ms-n1' /> 2.2%
@@ -66,14 +74,13 @@ const CardsWidget17: FC<Props> = ({
           <div className='d-flex fw-semibold align-items-center'>
             <div className='bullet w-8px h-3px rounded-2 bg-success me-3'></div>
             <div className='text-gray-500 flex-grow-1 me-4'>Tugallangan</div>
-            <div className='fw-bolder text-gray-700 text-xxl-end'>1</div>
+            <div className='fw-bolder text-gray-700 text-xxl-end'>{data.completed_orders}</div>
           </div>
           <div className='d-flex fw-semibold align-items-center my-3'>
             <div className='bullet w-8px h-3px rounded-2 bg-primary me-3'></div>
             <div className='text-gray-500 flex-grow-1 me-4'>Tugallanmagan</div>
-            <div className='fw-bolder text-gray-700 text-xxl-end'>$2,820</div>
+            <div className='fw-bolder text-gray-700 text-xxl-end'>{data.uncompleted_orders}</div>
           </div>
-          
         </div>
       </div>
     </div>

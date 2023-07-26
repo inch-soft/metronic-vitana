@@ -15,6 +15,8 @@ import Product from '../pages/product'
 import Customer from '../pages/customer'
 import EditPage from '../pages/product/editAdd'
 import EditPageCustomer from '../pages/customer/editAdd'
+import EditPageOrder from '../pages/order/editAdd'
+import AddManager from '../pages/manager/addManager'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -35,14 +37,19 @@ const PrivateRoutes = () => {
         <Route path='product/:id' element={<EditPage />} />
         <Route path='product/add' element={<EditPage />} />
         <Route path='order' element={<Order />} />
+        <Route path='order/add' element={<EditPageOrder />} />
+        <Route path='order/:id' element={<EditPageOrder />} />
 
         <Route path='customer' element={<Customer />} />
         <Route path='customer/:id' element={<EditPageCustomer />} />
         <Route path='customer/add' element={<EditPageCustomer />} />
-        
+
         <Route path='stock' element={<Stock />} />
         <Route path='response' element={<Response />} />
         <Route path='manager' element={<Manager />} />
+        <Route path='manager/add' element={<AddManager />} />
+
+        
         {/* Lazy Modules */}
         <Route
           path='crafted/pages/profile/*'

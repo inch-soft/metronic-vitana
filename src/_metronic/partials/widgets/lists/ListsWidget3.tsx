@@ -12,7 +12,7 @@ const ListsWidget3: React.FC<Props> = ({className}) => {
     <div className={`card ${className}`}>
       {/* begin::Header */}
       <div className='card-header border-0'>
-        <h3 className='card-title fw-bold text-dark'>Todo</h3>
+        <h3 className='card-title fw-bold text-dark'>Mavjud Mahsulotlar</h3>
         <div className='card-toolbar'>
           {/* begin::Menu */}
           <button
