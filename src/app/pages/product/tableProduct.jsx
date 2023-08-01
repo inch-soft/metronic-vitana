@@ -37,9 +37,9 @@ const TableProduct = ({className}) => {
   }
   return (
     <>
-      <div className='card'>
+      {/* <div className='card'>
         <div className='card-body py-3'>Filter</div>
-      </div>
+      </div> */}
       <br />
       <div className={`card ${className}`}>
         <div className='card-header border-0 pt-5'>

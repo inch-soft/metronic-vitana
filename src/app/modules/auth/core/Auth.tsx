@@ -92,14 +92,18 @@ const AuthInit: FC<WithChildren> = ({children}) => {
     //   logout()
     //   setShowSplashScreen(false)
     // }
-    
+    const authLocal: any = localStorage.getItem('kt-auth-react-v')
+    const parseData = JSON.parse(authLocal)
+    const expireDate = Date.parse(parseData.expiration_date)
+
     if (auth) {
       setShowSplashScreen(false)
     } else {
-      logout()
-      setShowSplashScreen(false)
+      if (new Date(expireDate) < new Date()) {
+        logout()
+        setShowSplashScreen(false)
+      }
     }
-    // eslint-disable-next-line
   }, [])
 
   return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>

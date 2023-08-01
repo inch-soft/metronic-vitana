@@ -37,9 +37,9 @@ const TableCustomer = ({className}) => {
   }
   return (
     <>
-      <div className='card'>
+      {/* <div className='card'>
         <div className='card-body py-3'>Filter</div>
-      </div>
+      </div> */}
       <br />
       <div className={`card ${className}`}>
         <div className='card-header border-0 pt-5'>
@@ -76,8 +76,8 @@ const TableCustomer = ({className}) => {
 
               <tbody>
                 {data?.results?.length &&
-                  data?.results?.map((item) => (
-                    <tr>
+                  data?.results?.map((item, index) => (
+                    <tr key={index}>
                       <td>
                         <div className='d-flex align-items-center'>
                           <div className='d-flex justify-content-start flex-column'>
@@ -127,7 +127,7 @@ const TableCustomer = ({className}) => {
                       </td>
                       <td>
                         <div className='d-flex justify-content-end flex-shrink-0'>
-                          <Link to={`/customer/${item.id}`} className='card-product__desc'>
+                          <Link to={`/customer/${item.code}`} className='card-product__desc'>
                             <div className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                               <KTIcon iconName='pencil' className='fs-3' />
                             </div>

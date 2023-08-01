@@ -1,19 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react'
-import {
-  createOrder,
-  getProductId,
-  editProduct,
-  deleteProduct,
-  getProduct,
-  getOrderId,
-} from '../../modules/auth/core/_requests'
+import {createOrder, editProduct, getProduct, getOrderId} from '../../modules/auth/core/_requests'
 import {useNavigate, useParams} from 'react-router-dom'
-import {ToastContainer, toast} from 'react-toastify'
+import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {KTIcon} from '../../../_metronic/helpers'
-import Select from 'react-select'
-import {MultiSelect} from 'react-multi-select-component'
 
 const regions = [
   {
@@ -62,6 +53,18 @@ const regions = [
   },
 ]
 
+const initialProducts = [
+  {
+    id: 1,
+    name: 'Product 1',
+  },
+  {
+    id: 2,
+    name: 'Product 2',
+  },
+  // Add more products here as needed
+]
+
 const EditPageOrder = () => {
   const [paymentType, setPaymentType] = useState(null)
   const [code, setCode] = useState(null)
@@ -70,10 +73,8 @@ const EditPageOrder = () => {
   const [selectedOptions, setSelectedOptions] = useState([])
   const [selectRegion, setSelectRegion] = useState(null)
 
-// FILTER
-// FILTER
-
-
+  // FILTER
+  // FILTER
 
   const params = useParams()
   const navigate = useNavigate()
@@ -88,7 +89,7 @@ const EditPageOrder = () => {
     }
     if (params.id) {
       getOrderId(formData, params?.id).then((r) => {
-        console.log(r,"reponse");
+        console.log(r, 'reponse')
         setIsCompleted(r.data.is_completed)
         setPaymentType(r.data.payment_type)
       })
@@ -143,6 +144,25 @@ const EditPageOrder = () => {
     }
   }
 
+  const [count, setCount] = useState(0) // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
+
+  function increment() {
+    //setCount(prevCount => prevCount+=1);
+    setCount(function (prevCount) {
+      return (prevCount += 1)
+    })
+  }
+
+  function decrement() {
+    setCount(function (prevCount) {
+      if (prevCount > 0) {
+        return (prevCount -= 1)
+      } else {
+        return (prevCount = 0)
+      }
+    })
+  }
+
   const handleOptionClick = (optionValue) => {
     console.log(optionValue, 'select123')
 
@@ -156,6 +176,7 @@ const EditPageOrder = () => {
 
   const isOptionSelected = (optionValue) => selectedOptions.includes(optionValue)
   console.log(selectedOptions, ':selectr')
+
   return (
     <>
       <button onClick={() => navigate(-1)} className='btn btn-info mb-5'>
@@ -215,8 +236,7 @@ const EditPageOrder = () => {
             </select>
           </div>
         </div>
-        <p>Продукт</p>
-        <div className='multiselect-dropdown'>
+        {/* <div className='multiselect-dropdown'>
           <div className='selected-options'>
             {selectedOptions.map((optionValue) => (
               <div key={optionValue} className='selected-option active'>
@@ -241,7 +261,54 @@ const EditPageOrder = () => {
               ))}
             </ul>
           </div>
-        </div>
+        </div> */}
+
+        {/* <div className='table-responsive'>
+          <table className='table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4'>
+            <thead>
+              <tr className='fw-bold text-muted'>
+                <th className='min-w-140px'> Маҳсулот номи</th>
+                <th className='min-w-140px'> Маҳсулот нархи</th>
+                <th className='min-w-140px'>Буюртма сони</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {product.length &&
+                product.map((item) => (
+                  <tr key={item.id}>
+                    <td className='text-end'>
+                      <div className='d-flex flex-column w-100 me-2'>
+                        <div className='d-flex flex-stack mb-2'>
+                          <span className='text-dark fw-bold fs-7 fw-semibold'>{item.name}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className='text-end'>
+                      <div className='d-flex flex-column w-100 me-2'>
+                        <div className='d-flex flex-stack mb-2'>
+                          <span className='text-dark fw-bold fs-7 fw-semibold'>{item.price}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className='text-end'>
+                      <div className='d-flex flex-column w-100 me-2'>
+                        <div className='d-flex flex-stack mb-2'>
+                          <span className='text-dark fw-bold fs-7 fw-semibold'>
+                            <div className='btnIncre'>
+                              <button onClick={decrement}>-</button>
+                              <div>{count}</div>
+                              <button onClick={increment}>+</button>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div> */}
 
         <div className='d-flex align-items-end justify-content-end'>
           <button onClick={submit} className='btn btn-primary'>

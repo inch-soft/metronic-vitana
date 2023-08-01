@@ -60,7 +60,7 @@
 
 /* Style for the dropdown */
 .dropdown {
-//   position: absolute;
+  //   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
@@ -106,4 +106,29 @@
 .option.selected {
   background-color: #007bff;
   color: #fff;
+}
+
+.btnIncre {
+  display: flex !important;
+  gap: 10px !important;
+
+  button {
+    background: #d8d8d8;
+    border: none;
+    outline: none;
+  }
+}
+
+.btnClose {
+  display: flex !important;
+  justify-content: flex-end !important;
+  .exitBtn {
+    border: none !important;
+    background: #8b8b8b !important;
+    color: #fff !important;
+    font-weight: 800 !important;
+    border-radius: 10px !important;
+    height: 45px !important;
+    // background-color: #28a745 !important;
+  }
 }
