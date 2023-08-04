@@ -5,7 +5,7 @@ import {useNavigate, useParams} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {KTIcon} from '../../../_metronic/helpers'
-
+import ProductItem from './productitem'
 const regions = [
   {
     id: 1,
@@ -55,23 +55,34 @@ const regions = [
 
 const initialProducts = [
   {
-    id: 1,
-    name: 'Product 1',
+    id: 2,
+    name: 'Kuler',
+    price: 1500000,
+    qty: 0,
   },
   {
-    id: 2,
-    name: 'Product 2',
+    id: 3,
+    name: 'Suv 5L',
+    price: 5000,
+    qty: 5,
   },
-  // Add more products here as needed
+  {
+    id: 4,
+    name: 'Suv 1L',
+    price: 1500,
+    qty: 24,
+  },
 ]
 
 const EditPageOrder = () => {
   const [paymentType, setPaymentType] = useState(null)
   const [code, setCode] = useState(null)
   const [isCompleted, setIsCompleted] = useState(null)
-  const [product, setProduct] = useState([])
   const [selectedOptions, setSelectedOptions] = useState([])
   const [selectRegion, setSelectRegion] = useState(null)
+  const [purchases, setPurchases] = useState([])
+
+  const [products, setProducts] = useState([])
 
   // FILTER
   // FILTER
@@ -98,7 +109,8 @@ const EditPageOrder = () => {
     getProduct({
       all: true,
     }).then((r) => {
-      setProduct(r.data)
+      setProducts(r.data)
+      console.log(r, 'response')
     })
   }, [])
 
@@ -107,8 +119,8 @@ const EditPageOrder = () => {
       payment_type: paymentType,
       customer: +code,
       is_completed: isCompleted,
-      products: selectedOptions,
       region: +selectRegion,
+      purchases: purchases,
     }
     if (params.id) {
       editProduct(formData, params.id)
@@ -144,39 +156,63 @@ const EditPageOrder = () => {
     }
   }
 
-  const [count, setCount] = useState(0) // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
-
-  function increment() {
-    //setCount(prevCount => prevCount+=1);
-    setCount(function (prevCount) {
-      return (prevCount += 1)
-    })
-  }
-
-  function decrement() {
-    setCount(function (prevCount) {
-      if (prevCount > 0) {
-        return (prevCount -= 1)
-      } else {
-        return (prevCount = 0)
+  const handleIncrement = (productId) => {
+    const updatedProducts = products.map((product) => {
+      if (product.id === productId) {
+        return {
+          ...product,
+          qty: product.qty - 1,
+        }
       }
+      return product
     })
-  }
 
-  const handleOptionClick = (optionValue) => {
-    console.log(optionValue, 'select123')
+    setProducts(updatedProducts)
 
-    const isOptionSelected = selectedOptions.includes(optionValue)
-    if (isOptionSelected) {
-      setSelectedOptions(selectedOptions.filter((value) => value !== optionValue))
+    const existingPurchase = purchases.find((purchase) => purchase.purchased_product === productId)
+    if (existingPurchase) {
+      const updatedPurchases = purchases.map((purchase) => {
+        if (purchase.purchased_product === productId) {
+          return {
+            ...purchase,
+            purchased_count: purchase.purchased_count + 1,
+          }
+        }
+        return purchase
+      })
+      setPurchases(updatedPurchases)
     } else {
-      setSelectedOptions([...selectedOptions, optionValue])
+      setPurchases([...purchases, {purchased_count: 1, purchased_product: productId}])
     }
   }
 
-  const isOptionSelected = (optionValue) => selectedOptions.includes(optionValue)
-  console.log(selectedOptions, ':selectr')
+  const handleDecrement = (productId) => {
+    const updatedProducts = products.map((product) => {
+      if (product.id === productId) {
+        return {
+          ...product,
+          qty: product.qty + 1,
+        }
+      }
+      return product
+    })
 
+    setProducts(updatedProducts)
+
+    const existingPurchase = purchases.find((purchase) => purchase.purchased_product === productId)
+    if (existingPurchase) {
+      const updatedPurchases = purchases.map((purchase) => {
+        if (purchase.purchased_product === productId) {
+          return {
+            ...purchase,
+            purchased_count: purchase.purchased_count - 1,
+          }
+        }
+        return purchase
+      })
+      setPurchases(updatedPurchases.filter((purchase) => purchase.purchased_count > 0))
+    }
+  }
   return (
     <>
       <button onClick={() => navigate(-1)} className='btn btn-info mb-5'>
@@ -236,80 +272,16 @@ const EditPageOrder = () => {
             </select>
           </div>
         </div>
-        {/* <div className='multiselect-dropdown'>
-          <div className='selected-options'>
-            {selectedOptions.map((optionValue) => (
-              <div key={optionValue} className='selected-option active'>
-                {product.find((option) => option.id === optionValue).name}
-                <button onClick={() => handleOptionClick(optionValue)}>x</button>
-              </div>
-            ))}
-          </div>
-          <div className='dropdown'>
-            <div className='dropdown-header'>
-              {selectedOptions.length > 0 ? `${selectedOptions.length} selected` : 'Select options'}
-            </div>
-            <ul className='dropdown-options'>
-              {product.map((option) => (
-                <li
-                  key={option.id}
-                  className={isOptionSelected(option.name) ? 'option active' : 'option'}
-                  onClick={() => handleOptionClick(option.id)}
-                >
-                  {option.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div> */}
-
-        {/* <div className='table-responsive'>
-          <table className='table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4'>
-            <thead>
-              <tr className='fw-bold text-muted'>
-                <th className='min-w-140px'> Маҳсулот номи</th>
-                <th className='min-w-140px'> Маҳсулот нархи</th>
-                <th className='min-w-140px'>Буюртма сони</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {product.length &&
-                product.map((item) => (
-                  <tr key={item.id}>
-                    <td className='text-end'>
-                      <div className='d-flex flex-column w-100 me-2'>
-                        <div className='d-flex flex-stack mb-2'>
-                          <span className='text-dark fw-bold fs-7 fw-semibold'>{item.name}</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td className='text-end'>
-                      <div className='d-flex flex-column w-100 me-2'>
-                        <div className='d-flex flex-stack mb-2'>
-                          <span className='text-dark fw-bold fs-7 fw-semibold'>{item.price}</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td className='text-end'>
-                      <div className='d-flex flex-column w-100 me-2'>
-                        <div className='d-flex flex-stack mb-2'>
-                          <span className='text-dark fw-bold fs-7 fw-semibold'>
-                            <div className='btnIncre'>
-                              <button onClick={decrement}>-</button>
-                              <div>{count}</div>
-                              <button onClick={increment}>+</button>
-                            </div>
-                          </span>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div> */}
-
+        <div className='products'>
+          {products.map((product) => (
+            <ProductItem
+              key={product.id}
+              product={product}
+              onIncrement={handleIncrement}
+              onDecrement={handleDecrement}
+            />
+          ))}
+        </div>
         <div className='d-flex align-items-end justify-content-end'>
           <button onClick={submit} className='btn btn-primary'>
             Сохранить

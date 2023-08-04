@@ -132,3 +132,42 @@
     // background-color: #28a745 !important;
   }
 }
+
+.products {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.wrapProdOrder {
+  padding: 13px;
+  border-radius: 14px;
+  background: #d1d1d1;
+  .wrpaBtn {
+    display: flex;
+    gap: 10px;
+    .increment {
+      background: rgb(128, 80, 80);
+      border: none;
+      outline: none;
+      font-size: 24px;
+      font-weight: 700;
+      width: 35px;
+      height: 35px;
+      color: #fff;
+      border-radius: 10px;
+    }
+
+    .decrement {
+      background: rgb(44, 126, 51);
+      border: none;
+      outline: none;
+      font-size: 18px;
+      font-weight: 700;
+      width: 35px;
+      height: 35px;
+      border-radius: 10px;
+      color: #fff;
+    }
+  }
+}
