@@ -284,7 +284,7 @@ const EditPageCustomer = () => {
                                 } else if (item.payment_type == 3) {
                                   return <span>Mirobod tumani</span>
                                 } else if (item.payment_type == 4) {
-                                  return <span>Mirzo Ulug'bek tumani</span>
+                                  return <span>Mirzo Ulugbek tumani</span>
                                 } else if (item.payment_type == 5) {
                                   return <span>Olmazor tumani</span>
                                 } else if (item.payment_type == 6) {
@@ -300,7 +300,7 @@ const EditPageCustomer = () => {
                                 } else if (item.payment_type == 11) {
                                   return <span>Yunusobod tumani</span>
                                 } else {
-                                  return <span className='badge badge-info'>Ko'rsatilmagan</span>
+                                  return <span className='badge badge-info'>Korsatilmagan</span>
                                 }
                               })()}
                             </div>

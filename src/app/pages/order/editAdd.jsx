@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react'
 import {createOrder, editProduct, getProduct, getOrderId} from '../../modules/auth/core/_requests'
