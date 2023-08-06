@@ -74,9 +74,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "prettier --check .",
-    "format": "prettier --write .",
-    "rtl": "webpack --config=rtl.config.js"
+    "eject": "react-scripts eject"
   }
 }
