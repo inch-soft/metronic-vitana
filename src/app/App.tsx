@@ -5,7 +5,7 @@ import {LayoutProvider, LayoutSplashScreen} from '../_metronic/layout/core'
 import {MasterInit} from '../_metronic/layout/MasterInit'
 import {AuthInit} from './modules/auth'
 import {ThemeModeProvider} from '../_metronic/partials'
-import {ToastContainer, toast} from 'react-toastify'
+import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 const App = () => {
   return (

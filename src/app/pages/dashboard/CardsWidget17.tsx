@@ -5,7 +5,6 @@ import {FC, useEffect, useRef} from 'react'
 // import {useThemeMode} from '../../../layout/theme-mode/ThemeModeProvider'
 import {getCSSVariableValue} from '../../../_metronic/assets/ts/_utils'
 import {useThemeMode} from '../../../_metronic/partials'
-import {KTIcon} from '../../../_metronic/helpers'
 
 type Props = {
   className: string

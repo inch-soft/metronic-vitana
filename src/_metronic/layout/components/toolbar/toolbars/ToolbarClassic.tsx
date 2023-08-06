@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {useState} from 'react'
 import {CreateAppModal} from '../../../../partials'
-import {useLayout} from '../../../core'
 
 const ToolbarClassic = () => {
   const [showCreateAppModal, setShowCreateAppModal] = useState<boolean>(false)
